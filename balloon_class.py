@@ -1,8 +1,6 @@
+
 import pygame
-import random
 
-
-# Balloon class
 class Balloon:
     def __init__(self, x, y, speed, color):
         self.x = x
