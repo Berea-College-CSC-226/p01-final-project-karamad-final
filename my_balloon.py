@@ -80,12 +80,25 @@ def main():
             draw_text("Click Start to Play Again", 70, 350, BLACK)
             pygame.draw.rect(screen, GREEN, (150, 400, 100, 50))
             draw_text("Start", 165, 410, WHITE)
+            for event in pygame.event.get():
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    pos = pygame.mouse.get_pos()
+                    if 150 <= pos[0] <= 250 and 400 <= pos[1] <= 450:
+                        # Reset game variables and restart
+                        running = True
+                        game_over = False
+                        score = 0
+                        missed_balloons = 0
+                        total_balloons = 0
+                        balloons = []
+                        last_balloon_time = pygame.time.get_ticks()  # Reset the timer
+
         else:
             # Add 5 new balloons every second
             current_time = pygame.time.get_ticks()
             if current_time - last_balloon_time >= 1000 and total_balloons < 30:
                 # Add 5 new balloons at a time
-                for _ in range(5):  # Add 5 balloons each second
+                for _ in range(3):  # Add 5 balloons each second
                     balloons.append(Balloon(random.randint(20, SCREEN_WIDTH - 20), random.randint(-100, -20), random.randint(2, 5), random.choice(COLORS)))
                     total_balloons += 1
                 last_balloon_time = current_time  # Update the last balloon time
